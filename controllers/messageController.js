@@ -5,25 +5,19 @@ const { body, validationResult } = require("express-validator");
 
 exports.index = (req, res) => {
   res.render("index", {
-    title: "user-message-board"
+    title: "user-message-board",
   });
 };
 
 exports.message_create_get = (req, res, next) => {
   res.render("message_form", {
-    title: "Post Message"
-  })
+    title: "Post Message",
+  });
 };
 
 exports.message_create_post = [
-  body("msg_title")
-    .trim()  
-    .isLength({ min: 1 })
-    .escape(),
-  body("msg_text")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
+  body("msg_title").trim().isLength({ min: 1 }).escape(),
+  body("msg_text").trim().isLength({ min: 1 }).escape(),
   (req, res, next) => {
     const errors = validationResult(req);
 
@@ -50,6 +44,6 @@ exports.message_create_post = [
         return next(err);
       }
       res.redirect("/");
-    })
+    });
   },
 ];
