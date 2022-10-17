@@ -1,5 +1,6 @@
 const Message = require("../models/message");
 const User = require("../models/user");
+const async = require("async");
 const { body, validationResult } = require("express-validator");
 
 exports.index = (req, res) => {
@@ -28,9 +29,8 @@ exports.message_create_post = [
 
     const msg = new Message({
       title: "Post Message",
-      msg_title: req.body.msg_title,
-      time_stamp: new Date(),
-      msg_text: req.body.msg_text,
+      title: req.body.msg_title,
+      text: req.body.msg_text,
     });
 
     if (!errors.isEmpty()) {
@@ -38,18 +38,18 @@ exports.message_create_post = [
         res.render("message_form", {
           title: "Post Message",
           msg_title: results.msg_title,
-          time_stamp: new Date(),
           msg_text: results.msg_text,
           errors: errors.array(),
         });
       });
       return;
     }
+
+    msg.save((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/");
+    })
   },
-  message.save((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
-  })
 ];

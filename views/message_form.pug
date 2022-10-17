@@ -1,4 +1,16 @@
 extends layout
 
 block content
-  p Hello
+  h1=title
+  form(action="", method="post")
+    div.form-group
+      label(for="msg_title") Title: 
+      input#title.form-control(type="text" placeholder="Title" name="msg_title" required="true")
+    div.form-group
+      label(for="msg_text") Text: 
+      input#text.form-control(type="text" placeholder="Text" name="msg_text" required="true")
+    button.btn.btn-primary(type="submit") Post
+  if errors
+    ul
+      for errors in errors
+        li!= error.msg

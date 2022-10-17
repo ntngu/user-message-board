@@ -11,7 +11,13 @@ html(lang="en")
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       ul.navbar-nav
         li.nav-item
-          a.nav-link(href="#") Home
+          a.nav-link(href="/") Home
         li.nav-item
-          a.nav-link(href="#") Post
+          a.nav-link(href="/post") Post
+        if user
+          li.nav-item
+            a.nav-link(href="/log-out") Log Out
+        else
+          li.nav-item
+            a.nav-link(href="/log-in") Log In
     block content
