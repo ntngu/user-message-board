@@ -5,7 +5,8 @@ const UserSchema = new Schema({
   name_first: { type: String, required: true, minLength: 1 },
   name_last: { type: String, required: true, minLength: 1 },
   username: { type: String, required: true, minLength: 4},
-  password: { typep: String, required: true, minLength: 6 },
+  password: { type: String, required: true, minLength: 6 },
+  created: { type: Date(), required: true },
 });
 
 module.exports = mongoose.model("User", UserSchema);
