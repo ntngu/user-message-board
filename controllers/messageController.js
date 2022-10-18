@@ -20,11 +20,12 @@ exports.message_create_post = [
   body("msg_text").trim().isLength({ min: 1 }).escape(),
   (req, res, next) => {
     const errors = validationResult(req);
-
+    var date = new Date();
     const msg = new Message({
       title: "Post Message",
       title: req.body.msg_title,
       text: req.body.msg_text,
+      time_stamp: date.toString(),
     });
 
     if (!errors.isEmpty()) {
@@ -40,7 +41,7 @@ exports.message_create_post = [
     }
 
     msg.save((err) => {
-      if (err) {
+      if (err) { 
         return next(err);
       }
       res.redirect("/");

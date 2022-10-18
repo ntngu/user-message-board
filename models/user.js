@@ -6,6 +6,7 @@ const UserSchema = new Schema({
   name_last: { type: String, required: true, minLength: 1 },
   username: { type: String, required: true, minLength: 4 },
   password: { type: String, required: true, minLength: 6 },
+  time_created: { type: String, required: true, minLength: 1 },
 });
 
 module.exports = mongoose.model("User", UserSchema);

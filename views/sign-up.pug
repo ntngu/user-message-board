@@ -2,4 +2,18 @@ extends layout
 
 block content
   h1=title
-  
+  form(action="/sign-up", method="post")
+    div.form-group
+      label(for="first-name") First Name: 
+      input#first-name.form-control(type="text")
+    div.form-group
+      label(for="last-name") Last Name:
+      input#last-name.form-conrol(type="text")
+    div.form-group
+      label(for="username") Username:
+      input#username.form-control(type="email")
+    div.form-group
+      label(for="password") Password:
+      input#password.form-control(type="password")
+    button.btn.btn-primary(type="submit") Submit
+      
