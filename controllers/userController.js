@@ -17,7 +17,14 @@ exports.user_create_post = [
     .trim()
     .isLength({ min: 4 })
     .withMessage("Minimum username length is 4 characters.")
-    .escape(),
+    .escape()
+    .custom((value) => {
+      return User.findOne({ username: value} ).then(user => {
+        if (user) {
+          return Promise.reject("Username already in use.");
+        }
+      });
+    }),
   body("password")
     .trim()
     .isLength({ min: 6 })
