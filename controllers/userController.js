@@ -18,12 +18,11 @@ exports.user_create_post = [
     .isLength({ min: 4 })
     .withMessage("Minimum username length is 4 characters.")
     .escape()
-    .custom((value) => {
-      return User.findOne({ username: value} ).then(user => {
-        if (user) {
-          return Promise.reject("Username already in use.");
-        }
-      });
+    .custom(async (value) => {
+      const user = await User.findOne({ username: value });
+      if (user) {
+        return Promise.reject("Username already in use.");
+      }
     }),
   body("password")
     .trim()
@@ -44,7 +43,6 @@ exports.user_create_post = [
 
   (req, res, next) => {
     const errors = validationResult(req);
-    console.log(errors);
     if (!errors.isEmpty()) {
       res.render("sign-up", {
         first_name: req.body.first_name,
