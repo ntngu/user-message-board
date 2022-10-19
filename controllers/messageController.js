@@ -3,15 +3,10 @@ const User = require("../models/user");
 const async = require("async");
 const { body, validationResult } = require("express-validator");
 
-exports.index = (req, res) => {
-  res.render("index", {
-    title: "user-message-board",
-  });
-};
-
 exports.message_create_get = (req, res, next) => {
   res.render("message_form", {
     title: "Post Message",
+    user: req.user,
   });
 };
 
