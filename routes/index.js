@@ -18,9 +18,12 @@ router.get("/post", messageController.message_create_get);
 router.post("/post", messageController.message_create_post);
 
 router.get("/log-in", userController.user_login_get);
-router.post("/log-in", passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/",
-}));
+router.post(
+  "/log-in",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/",
+  })
+);
 
 module.exports = router;
