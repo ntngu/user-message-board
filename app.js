@@ -19,7 +19,6 @@ var bcrypt = require("bcrypt");
 var app = express();
 
 var mongoose = require("mongoose");
-const user = require("./models/user");
 var mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;

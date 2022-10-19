@@ -1,7 +1,30 @@
 const Message = require("../models/message");
-const User = require("../models/user");
 const async = require("async");
 const { body, validationResult } = require("express-validator");
+
+exports.index = (req, res, next) => {
+  if (!req.user) {
+    res.render("index", {
+      user: req.user
+    })
+  } else {
+    Message.find({}, "title text")
+      .sort({ time_stamp: -1 })
+      .populate("title")
+      .populate("text")
+      .populate("time_stamp")
+      .populate("user")
+      .exec(function(err, list_messages) {
+        if (err) {
+          return next(err);
+        }
+        res.render("index", {
+          user: req.user,
+          message_list: list_messages,
+        });
+      });
+  }
+}
 
 exports.message_create_get = (req, res, next) => {
   res.render("message_form", {
@@ -21,6 +44,7 @@ exports.message_create_post = [
       title: req.body.msg_title,
       text: req.body.msg_text,
       time_stamp: date.toString(),
+      user: req.user.username,
     });
 
     if (!errors.isEmpty()) {

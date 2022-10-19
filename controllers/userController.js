@@ -60,6 +60,8 @@ exports.user_create_post = [
         username: req.body.username,
         password: hashedPassword,
         time_created: date.toString(),
+        member: false,
+        admin: false,
       }).save((err) => {
         if (err) {
           return next(err);

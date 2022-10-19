@@ -5,9 +5,7 @@ var messageController = require("../controllers/messageController");
 var userController = require("../controllers/userController");
 
 /** GET home page. */
-router.get("/", (req, res) => {
-  res.render("index", { user: req.user });
-});
+router.get("/", messageController.index);
 
 /** GET and POST signup */
 router.get("/sign-up", userController.user_create_get);

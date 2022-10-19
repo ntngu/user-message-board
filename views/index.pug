@@ -3,7 +3,12 @@ extends layout
 block content
   h1 user-message-board
   if user
-
+    ul
+      for message in message_list
+        h3 #{message.title}
+        p #{message.text}
+        if user.member
+          p #{message.time_stamp.substring(0, 21)} | #{message.user}
   else
     span Please 
     a(href="/log-in") log-in 
