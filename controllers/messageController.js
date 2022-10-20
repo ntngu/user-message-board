@@ -9,7 +9,7 @@ exports.index = (req, res, next) => {
     })
   } else {
     Message.find({}, "title text")
-      .sort({ time_stamp: -1 })
+      .sort({ _id: -1 })
       .populate("title")
       .populate("text")
       .populate("time_stamp")
